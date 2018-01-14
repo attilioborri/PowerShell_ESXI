@@ -1,4 +1,4 @@
-﻿# ESXI BackUP PowerShell Script
+﻿# ESXI Configuration BackUP PowerShell Script
 #
 # Usage example:
 # Automatic Login:  BackUP_ESXI.ps1 <ip_address> <username> <password> <default_path>
