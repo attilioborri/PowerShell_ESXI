@@ -29,7 +29,7 @@ if($BackUP_ESXI_CountParameters.Equals(2)){
     $BackUP_ESXI_executebackup = 0
 }
 if($BackUP_ESXI_executebackup.Equals(1)){
-    Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $BackUP_ESXI_Temp_File.FullName
+    Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $BackUP_ESXI_DefaultPath
     Disconnect-VIServer -Server $BackUP_ESXI_Server -confirm:$false
 }else{
     echo ''
