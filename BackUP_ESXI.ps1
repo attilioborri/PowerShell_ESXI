@@ -9,6 +9,7 @@
 # 
 # Install-Module -Name VMware.PowerCLI
 
+$LocalTempFolder = "C:\ESXiBackUP"
 $BKPESXI_EnableDateRename = 1;
 #$BKPESXI_MAXBKP = 5; 
 
@@ -44,7 +45,7 @@ if($BackUP_ESXI_CountParameters.Equals(2)){
 if($BackUP_ESXI_executebackup.Equals(1)){
    if($BackUP_ESXI_DefaultPath.ToString().Contains('\\') -and $BackUP_ESXI_CountParameters.Equals(6)){
         #network drive
-        $LocalTempFolder = "C:\ESXiBackUP"
+        
         #New-Item -ItemType directory -Path $LocalTempFolder
         
         Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $LocalTempFolder;
