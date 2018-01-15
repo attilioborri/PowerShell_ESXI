@@ -64,6 +64,7 @@ if($BackUP_ESXI_executebackup.Equals(1)){
 
                     Move-Item -Path "$($files[$i].FullName)" -Destination "$newfile";
                     Move-Item $newfile $BackUP_ESXI_DefaultPath;
+                    Remove-Item $newfile;
                 }
             }
         }
