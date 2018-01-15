@@ -9,7 +9,7 @@
 # 
 # Install-Module -Name VMware.PowerCLI
 
-
+$BackUP_ESXI_Temp_File = New-TemporaryFile
 $BackUP_ESXI_Host = $args[0]
 $BackUP_ESXI_CountParameters = $args.Length
 $BackUP_ESXI_executebackup = 0
@@ -29,7 +29,7 @@ if($BackUP_ESXI_CountParameters.Equals(2)){
     $BackUP_ESXI_executebackup = 0
 }
 if($BackUP_ESXI_executebackup.Equals(1)){
-    Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $BackUP_ESXI_DefaultPath
+    Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $BackUP_ESXI_Temp_File.FullName
     Disconnect-VIServer -Server $BackUP_ESXI_Server -confirm:$false
 }else{
     echo ''
