@@ -10,8 +10,11 @@
 # Install-Module -Name VMware.PowerCLI
 
 $LocalTempFolder = "C:\ESXiBackUP"
+if(!(Test-Path $LocalTempFolder)){
+    New-Item -ItemType Directory -Force -Path $LocalTempFolder;
+}
 $BKPESXI_EnableDateRename = 1;
-#$BKPESXI_MAXBKP = 5; 
+$BKPESXI_MAXBKP = 2; 
 
 $s=Get-Date;
 $BackUP_ESXI_Temp_File = New-TemporaryFile;
@@ -55,17 +58,17 @@ if($BackUP_ESXI_executebackup.Equals(1)){
             $files = Get-ChildItem $LocalTempFolder;
             for($i=0;$i -lt $files.Count; $i++){
                 if(Test-Path $files[$i].FullName){
-                    $GetDate = Get-Date -format "yyyy/MM/dd_HHmm";
+                    $GetDate = Get-Date -format "yyyy/MM/dd_HHmmss";
                     $newfile = "$($LocalTempFolder)\$($files[$i].BaseName) $($GetDate)$($files[$i].Extension)".Replace(" ","_").Replace("/","-");
 
                     #echo $newfile;
                     #echo $($files[$i].FullName);
 
-                    echo "Move-Item -Path $($files[$i].FullName) -Destination $newfile";
+                    #echo "Move-Item -Path $($files[$i].FullName) -Destination $newfile";
 
                     Move-Item -Path "$($files[$i].FullName)" -Destination "$newfile";
                     Move-Item $newfile $BackUP_ESXI_DefaultPath;
-                    Remove-Item $newfile;
+                    #Remove-Item $newfile;
                 }
             }
         }
@@ -96,7 +99,25 @@ if($BackUP_ESXI_executebackup.Equals(1)){
 
 
 #Delete Temp File before end of the script
-Remove-Item $BackUP_ESXI_Temp_File -Force;
+#Remove-Item $BackUP_ESXI_Temp_File -Force;
+
+
+#Remove Old Remote Files if MAX!=0
+if($BKPESXI_MAXBKP.Equals(0)){
+    #do nothing
+}else{
+#delete old backups
+#$cnttotalfiles = $(Get-ChildItem -filter "$BackUP_ESXI_DefaultPath\*.tgz").Count;
+$filestoremove = Get-ChildItem -path "$BackUP_ESXI_DefaultPath\*.tgz" | sort LastWriteTime
+$cnt = $filestoremove.Count;
+    for($i=0;$i -lt $cnt; $i++){
+    #for($i=$filestoremove.Count;$i -lt 0; $i--){
+        if($cnt -gt $BKPESXI_MAXBKP){
+            Remove-Item $filestoremove[$i];
+            $cnt--;
+        }
+    }
+}
 
 
 $e=Get-Date; 
