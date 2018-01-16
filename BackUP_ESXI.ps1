@@ -1,8 +1,9 @@
 ﻿# ESXI Configuration BackUP PowerShell Script
 #
 # Usage example:
-# Automatic Login:  BackUP_ESXI.ps1 <ip_address> <username> <password> <default_path>
-# Custom Login:     BackUP_ESXI.ps1 <ip_address> <default_path>
+# Automatic Login (Lcal):  BackUP_ESXI.ps1 <ip_address> <username> <password> <default_path>
+# Automatic Login (Net):   BackUP_ESXI.ps1 <ip_address> <username> <password> <network path> <net_username> <net_password>
+# Custom Login:            BackUP_ESXI.ps1 <ip_address> <default_path>
 #
 # If the script doesn't work, install the following module from Admin account
 # https://www.powershellgallery.com/packages/VMware.PowerCLI/6.5.4.7155375
@@ -14,10 +15,10 @@ if(!(Test-Path $LocalTempFolder)){
     New-Item -ItemType Directory -Force -Path $LocalTempFolder;
 }
 $BKPESXI_EnableDateRename = 1;
-$BKPESXI_MAXBKP = 2; 
+$BKPESXI_MAXBKP = 7; 
 
 $s=Get-Date;
-$BackUP_ESXI_Temp_File = New-TemporaryFile;
+#$BackUP_ESXI_Temp_File = New-TemporaryFile;
 $BackUP_ESXI_Host = $args[0];
 $BackUP_ESXI_CountParameters = $args.Length;
 $BackUP_ESXI_executebackup = 0;
