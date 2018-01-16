@@ -1,5 +1,8 @@
 ﻿# ESXI Configuration BackUP PowerShell Script
 #
+# 
+#
+#
 # Usage example:
 # Automatic Login (Lcal):  BackUP_ESXI.ps1 <ip_address> <username> <password> <default_path>
 # Automatic Login (Net):   BackUP_ESXI.ps1 <ip_address> <username> <password> <network path> <net_username> <net_password>
@@ -7,6 +10,9 @@
 #
 # If the script doesn't work, install the following module from Admin account
 # https://www.powershellgallery.com/packages/VMware.PowerCLI/6.5.4.7155375
+#
+# Dependency for Install-Module (when not available)
+# https://www.microsoft.com/en-us/download/details.aspx?id=51451
 # 
 # Install-Module -Name VMware.PowerCLI
 
