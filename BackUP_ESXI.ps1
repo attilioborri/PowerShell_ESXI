@@ -60,7 +60,7 @@ if($BackUP_ESXI_executebackup.Equals(1)){
         
         Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $LocalTempFolder;
         Disconnect-VIServer -Server $BackUP_ESXI_Server -confirm:$false;
-        net use $BackUP_ESXI_DefaultPath /user:$BackUP_ESXI_NetUsername $BackUP_EDCI_NetPassword;
+        net use $BackUP_ESXI_DefaultPath /user:$BackUP_ESXI_NetUsername $BackUP_EDCI_NetPassword;#Open Connection
         if($BKPESXI_EnableDateRename.Equals(1)){
             $files = Get-ChildItem $LocalTempFolder;
             for($i=0;$i -lt $files.Count; $i++){
@@ -79,6 +79,7 @@ if($BackUP_ESXI_executebackup.Equals(1)){
                 }
             }
         }
+        net use $BackUP_ESXI_DefaultPath /del;#Close Connection
     }else{
         #local folder
         Get-VMHostFirmware -VMHost $BackUP_ESXI_Host -BackupConfiguration -DestinationPath $BackUP_ESXI_DefaultPath;
