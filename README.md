@@ -13,5 +13,5 @@ BackUP_ESXI.ps1 is a script that can be called from scheduled task to backup the
 
 Add a basic task and use the following settings:
 
-**Start a program**: powershell
+**Start a program**: powershell <br />
 **Add arguments**: -command "& '<path>\BackUP_ESXI.ps1' '<esxi_ipaddress>' '<esxi_username>' '<esxi_password>' '<network_share_path>' '<network_share_username>' '<network_share_password>'"
