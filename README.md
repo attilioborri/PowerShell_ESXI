@@ -1,5 +1,5 @@
 
-Version: 1.0 16-01-2018<br>
+Version: 1.0.1 16-01-2018<br>
 Developed by: Attilio Borri<br>
 
 BackUP_ESXI.ps1 is a script that can be called from scheduled task to backup the configuration of a ESXi Server.
