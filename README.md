@@ -8,6 +8,8 @@ BackUP_ESXI.ps1 is a script that can be called from scheduled task to backup the
 
 - [PackageManagement PowerShell Modules](https://www.microsoft.com/en-us/download/details.aspx?id=51451)
 - VMWare.PowerCLI
+	https://my.vmware.com/web/vmware/details?downloadGroup=PCLI650R1&productId=614
+	Install-Module -Name VMware.PowerCLI
 
 ## Scheduled Task
 
